@@ -10,7 +10,7 @@ repositories {
 }
 jar{
     manifest{
-        attributes 'Main-Class': 'vote.Serveur.main'
+        attributes 'Main-Class': 'vote.Scrutateur.main'
     }
 }
 
@@ -22,3 +22,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
