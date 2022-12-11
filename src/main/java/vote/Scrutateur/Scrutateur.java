@@ -1,7 +1,9 @@
 package vote.Scrutateur;
 import vote.Urne.RequeteScrutateur;
+import vote.Urne.Sondage;
 import vote.crypto.ElGamal;
 import vote.crypto.KeyInfo;
+import vote.crypto.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,26 +12,35 @@ import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
 
 public class Scrutateur extends Thread{
     private ServerSocket scrutateurSocket;
-    private KeyInfo privateKeyInfo;
-    private KeyInfo publicKeyInfo;
+    private HashMap<Sondage,KeyInfo> sondages;
     private volatile boolean signalArret;
 
-    public Scrutateur(int port, int nbBits) throws IOException {
+    public Scrutateur(int port) throws IOException {
         scrutateurSocket = new ServerSocket(port);
         scrutateurSocket.setSoTimeout(500);
         signalArret = false;
-        regenererKey(nbBits);
+        sondages = new HashMap<>();
     }
 
-    public void regenererKey(int nbBits){
-        System.out.println("Generation de la clé");
+
+    public KeyInfo addSondage(Sondage s,int nbBits){ //ajoute un sondage en cours,stock sa clé privé et retourne la clé publique
+        if (sondages.containsKey(s)){
+            System.out.println("Sondage deja connu");
+            return null;
+        }
+        System.out.println("Ajout du sondage dans la liste");
+
         KeyInfo[] keys = ElGamal.keyGen(nbBits);
-        privateKeyInfo = keys[0];
-        publicKeyInfo = keys[1];
-        System.out.println("Clé genéré");
+        sondages.put(s,keys[0]);
+        return keys[1];
+    }
+
+    public HashMap<Sondage,KeyInfo> getSondages(){
+        return sondages;
     }
 
     public void fermerScrutateur(){
@@ -52,6 +63,17 @@ public class Scrutateur extends Thread{
         }
     }
 
+
+    public int essayerDechiffrer(Message m, Sondage s, int nbParticipant){
+        if(!sondages.containsKey(s)){
+            System.out.println("Sondage inconnu");
+            return -2; //code d'erreur qui signifie que le sondage n'existe pas
+        }
+        int resultat = ElGamal.decrypt(m,sondages.remove(s),nbParticipant);
+        System.out.println("envoie de " + resultat);
+        return resultat;
+    }
+
     @Override
     public void run(){
         System.out.println("Serveur en ecoute");
@@ -67,15 +89,6 @@ public class Scrutateur extends Thread{
                 System.out.println("Error while accepting connection :" + e);
             }
         }
-    }
-
-
-    public KeyInfo getPrivateKeyInfo() {
-        return privateKeyInfo;
-    }
-
-    public KeyInfo getPublicKeyInfo() {
-        return publicKeyInfo;
     }
 
 }

@@ -4,11 +4,10 @@ package vote.Scrutateur;
 
 import vote.Scrutateur.Commandes.Commande;
 import vote.Scrutateur.Commandes.CommandeExit;
-import vote.Scrutateur.Commandes.CommandeRegenerer;
+import vote.Scrutateur.Commandes.CommandeVoirSondage;
 import vote.Scrutateur.Commandes.Exceptions.ExecutionFailedException;
 import vote.Scrutateur.Commandes.Exceptions.ParsingException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -26,8 +25,8 @@ public class Main {
             switch (firstWord) {
                 case "exit":
                     return new CommandeExit(scrutateur);
-                case "regenerateKeys":
-                    return new CommandeRegenerer(scrutateur, commandeBrut);
+                case "voir_sondage":
+                    return new CommandeVoirSondage(scrutateur);
             }
         }
         return null;
@@ -37,7 +36,7 @@ public class Main {
     public static void main(String[] args) {
         MessageDebut();
         try {
-            scrutateur = new Scrutateur(6656, 100); //Provisoire
+            scrutateur = new Scrutateur(6656); //Provisoire
             scrutateur.start();
         }
         catch (Exception e){
@@ -72,7 +71,7 @@ public class Main {
                 "  )(  (__)//   \\\\  \\\\    >>  //   \\\\_,-,>> \\\\,-.||>>_       \\\\     //  \\\\  //  \\\\  \n" +
                 " (__)    (_\") (\"_)(__)  (__)(__)  (__)\\.)   (_/(__)__)     (__)   (_\")(\"_)(_\")(\"_) \u001B[0m");
         System.out.println("\u001B[31mBienvenue dans le système du scrutateur !\u001B[0m");
-        System.out.println("\"\u001B[31mregenerateKeys [nbBits]\u001B[0m\" : regenerer la clé");
+        System.out.println("\"\u001B[31mvoir_sondage\u001B[0m\" : le nom parle de lui meme");
         System.out.println("\"\u001B[31mexit\u001B[0m\" : quitter le système");
     }
 
