@@ -1,6 +1,6 @@
 package vote.Scrutateur;
-import vote.Urne.RequeteScrutateur;
-import vote.Urne.Sondage;
+import vote.Urne.Requete.RequeteScrutateur.RequeteScrutateur;
+import vote.Urne.metier.Sondage;
 import vote.crypto.ElGamal;
 import vote.crypto.KeyInfo;
 import vote.crypto.Message;
@@ -8,7 +8,6 @@ import vote.crypto.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -18,16 +17,25 @@ public class Scrutateur extends Thread{
     private ServerSocket scrutateurSocket;
     private HashMap<Sondage,KeyInfo> sondages;
     private volatile boolean signalArret;
+    private int nbBitsMin;
 
-    public Scrutateur(int port) throws IOException {
+    public Scrutateur(int port,int nbBits) throws IOException {
         scrutateurSocket = new ServerSocket(port);
         scrutateurSocket.setSoTimeout(500);
         signalArret = false;
         sondages = new HashMap<>();
+        this.nbBitsMin = nbBits;
     }
 
+    public int getNbBitsMin() {
+        return nbBitsMin;
+    }
 
-    public KeyInfo addSondage(Sondage s,int nbBits){ //ajoute un sondage en cours,stock sa clé privé et retourne la clé publique
+    public void setNbBitsMin(int nbBitsMin){
+        this.nbBitsMin = nbBitsMin;
+    }
+
+    public KeyInfo addSondage(Sondage s, int nbBits){ //ajoute un sondage en cours,stock sa clé privé et retourne la clé publique
         if (sondages.containsKey(s)){
             System.out.println("Sondage deja connu");
             return null;

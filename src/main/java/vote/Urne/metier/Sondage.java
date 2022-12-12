@@ -1,9 +1,8 @@
-package vote.Urne;
+package vote.Urne.metier;
 
 import vote.crypto.KeyInfo;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Objects;
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package vote.Urne;
+package vote.Urne.Requete.RequeteScrutateur;
 
 import vote.Scrutateur.Scrutateur;
 

@@ -1,9 +1,8 @@
 package vote.Scrutateur.Commandes;
 
 import vote.Scrutateur.Commandes.Exceptions.ExecutionFailedException;
-import vote.Scrutateur.Commandes.Exceptions.ParsingException;
 import vote.Scrutateur.Scrutateur;
-import vote.Urne.Sondage;
+import vote.Urne.metier.Sondage;
 import vote.crypto.KeyInfo;
 
 import java.util.HashMap;

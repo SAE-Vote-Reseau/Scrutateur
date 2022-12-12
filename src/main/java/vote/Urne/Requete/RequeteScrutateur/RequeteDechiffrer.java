@@ -1,6 +1,7 @@
-package vote.Urne;
+package vote.Urne.Requete.RequeteScrutateur;
 
 import vote.Scrutateur.Scrutateur;
+import vote.Urne.metier.Sondage;
 import vote.crypto.Message;
 
 import java.io.IOException;
