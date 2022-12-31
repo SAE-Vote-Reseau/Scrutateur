@@ -39,7 +39,7 @@ public class Main {
     public static void main(String[] args) {
         MessageDebut();
         try {
-            scrutateur = new Scrutateur(6656,1024); //Provisoire
+            scrutateur = new Scrutateur(6656,2048); //Provisoire
             System.out.println("Taille minimum par defaut: 1024");
             scrutateur.start();
         }
@@ -76,7 +76,7 @@ public class Main {
                 " (__)    (_\") (\"_)(__)  (__)(__)  (__)\\.)   (_/(__)__)     (__)   (_\")(\"_)(_\")(\"_) \u001B[0m");
         System.out.println("\u001B[31mBienvenue dans le système du scrutateur !\u001B[0m");
         System.out.println("\"\u001B[31mvoir_sondage\u001B[0m\" : le nom parle de lui meme");
-        System.out.println("\"\u001B[31mchanger_taille [nbBits]\u001B[0m\" : change la taille minimum des clés");
+        System.out.println("\"\u001B[31mchanger_taille [nbBits]\u001B[0m\" : change la taille des clés");
         System.out.println("\"\u001B[31mexit\u001B[0m\" : quitter le système");
     }
 

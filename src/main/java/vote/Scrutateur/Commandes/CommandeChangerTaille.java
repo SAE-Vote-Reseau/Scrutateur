@@ -28,7 +28,7 @@ public class CommandeChangerTaille extends Commande {
 
     @Override
     public void executer() throws ExecutionFailedException {
-        getScrutateur().setNbBitsMin(nbBits);
+        getScrutateur().setNbBits(nbBits);
         System.out.println("taille changé à " + nbBits);
     }
 }

@@ -11,31 +11,32 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Scrutateur extends Thread{
     private ServerSocket scrutateurSocket;
     private HashMap<Sondage,KeyInfo> sondages;
     private volatile boolean signalArret;
-    private int nbBitsMin;
+    private int nbBits;
 
     public Scrutateur(int port,int nbBits) throws IOException {
         scrutateurSocket = new ServerSocket(port);
         scrutateurSocket.setSoTimeout(500);
         signalArret = false;
         sondages = new HashMap<>();
-        this.nbBitsMin = nbBits;
+        this.nbBits = nbBits;
     }
 
-    public int getNbBitsMin() {
-        return nbBitsMin;
+    public int getNbBits() {
+        return nbBits;
     }
 
-    public void setNbBitsMin(int nbBitsMin){
-        this.nbBitsMin = nbBitsMin;
+    public void setNbBits(int nbBitsMin){
+        this.nbBits = nbBitsMin;
     }
 
-    public KeyInfo addSondage(Sondage s, int nbBits){ //ajoute un sondage en cours,stock sa clé privé et retourne la clé publique
+    public KeyInfo addSondage(Sondage s){ //ajoute un sondage en cours,stock sa clé privé et retourne la clé publique
         if (sondages.containsKey(s)){
             System.out.println("Sondage deja connu");
             return null;
@@ -43,6 +44,7 @@ public class Scrutateur extends Thread{
         System.out.println("Ajout du sondage dans la liste");
 
         KeyInfo[] keys = ElGamal.keyGen(nbBits);
+        System.out.println("clé" + Arrays.toString(keys));
         sondages.put(s,keys[0]);
         return keys[1];
     }
