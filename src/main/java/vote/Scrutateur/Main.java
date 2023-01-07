@@ -39,8 +39,11 @@ public class Main {
     public static void main(String[] args) {
         MessageDebut();
         try {
-            scrutateur = new Scrutateur(6656,2048); //Provisoire
-            System.out.println("Taille minimum par defaut: 1024");
+            int port = ScrutateurConf.getInstance().getPort();
+            int nbBits = ScrutateurConf.getInstance().getNbBits();
+
+            scrutateur = new Scrutateur(port,nbBits); //Provisoire
+            System.out.println("Taille minimum par defaut: " + nbBits + "\nConfiguré avec le port: " + port);
             scrutateur.start();
         }
         catch (Exception e){

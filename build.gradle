@@ -10,7 +10,7 @@ repositories {
 }
 jar{
     manifest{
-        attributes 'Main-Class': 'vote.Scrutateur.main'
+        attributes 'Main-Class': 'vote.Scrutateur.Main'
     }
 }
 
