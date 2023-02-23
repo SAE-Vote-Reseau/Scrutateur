@@ -18,5 +18,4 @@ public abstract class Commande {
 
         public abstract void executer() throws ExecutionFailedException;
 
-
 }
