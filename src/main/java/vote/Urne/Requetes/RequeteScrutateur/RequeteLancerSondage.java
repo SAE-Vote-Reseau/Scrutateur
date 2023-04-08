@@ -1,4 +1,4 @@
-package vote.Urne.Requete.RequeteScrutateur;
+package vote.Urne.Requetes.RequeteScrutateur;
 
 import vote.Scrutateur.Scrutateur;
 import vote.Urne.metier.Sondage;

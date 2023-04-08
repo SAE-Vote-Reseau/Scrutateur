@@ -1,5 +1,5 @@
 package vote.Scrutateur;
-import vote.Urne.Requete.RequeteScrutateur.RequeteScrutateur;
+import vote.Urne.Requetes.RequeteScrutateur.RequeteScrutateur;
 import vote.Urne.metier.Sondage;
 import vote.crypto.ElGamal;
 import vote.crypto.KeyInfo;
