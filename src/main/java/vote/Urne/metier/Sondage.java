@@ -63,6 +63,18 @@ public class Sondage implements Serializable {
         return choix2;
     }
 
+    public String getChoix(int choix){
+        if(choix == 1){
+            return choix1;
+        }
+        else if(choix == 2){
+            return choix2;
+        }
+        else{
+            return null;
+        }
+    }
+
     @Override
     public String toString(){
         return consigne + ": " + choix1 + "/" + choix2 + (resultat == null ? ", le resultat n'est pas encore disponible":resultat);
