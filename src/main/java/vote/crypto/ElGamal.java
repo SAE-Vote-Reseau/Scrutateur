@@ -22,6 +22,8 @@ public class ElGamal {
         return v;
     }
 
+    /*nbBits doit etre > 1 */
+    /*la premiere case est la clé secrete, la deuxieme la clé public */
     public static KeyInfo[] keyGen(int nbBits) {
         Random rng = new SecureRandom();
         BigInteger p;
